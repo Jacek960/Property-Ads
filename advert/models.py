@@ -62,7 +62,7 @@ class Advert(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug and self.street:
-            self.slug = slugify(f"('na wynajem'-{self.category}-{self.location}-{self.street}")
+            self.slug = slugify(f"('na wynajem'-{self.category.slug}-{self.location.slug}-{self.street.lower().replace('ł', 'l')}")
         super(Advert, self).save(*args, **kwargs)
 
 

@@ -44,17 +44,29 @@ class AllAdsView(View):
         all_advertisement= Advert.objects.all()
         return render(request, 'advert/adverts_page.html', {'all_advertisement':all_advertisement,})
 
-def ad_by_location(request,location_slug=None):
-    location_count = Location.objects.annotate(total_locations=Count('advert')).order_by('name')
-    category_count = Category.objects.annotate(total_products=Count('advert')).order_by('name')
-    all_advertisement = Advert.objects.all()
-    categorys = Category.objects.all().order_by('name')
-    locations = Location.objects.all().order_by('name')
-    if location_slug:
-        location = Location.objects.get(slug=location_slug)
-        all_advertisement=all_advertisement.filter(location=location)
-    return render(request, 'advert/adverts_page.html',{'all_advertisement':all_advertisement,
-                                                                   'category_count': category_count,
-                                                                   'location_count': location_count,
-                                                                   'locations': locations,
-                                                                   'categorys':categorys})
+
+class AdsByLocationView(View):
+    def get(self,request,location_slug=None):
+        location_count = Location.objects.annotate(total_locations=Count('advert')).order_by('name')
+        category_count = Category.objects.annotate(total_products=Count('advert')).order_by('name')
+        all_advertisement = Advert.objects.all()
+        categorys = Category.objects.all().order_by('name')
+        locations = Location.objects.all().order_by('name')
+        if location_slug:
+            location = Location.objects.get(slug=location_slug)
+            all_advertisement=all_advertisement.filter(location=location)
+        return render(request, 'advert/adverts_page.html',{'all_advertisement':all_advertisement,
+                                                                       'category_count': category_count,
+                                                                       'location_count': location_count,
+                                                                       'locations': locations,
+                                                                       'categorys':categorys})
+
+class DashbordView(View):
+    def get(self,request):
+        user_ads = Advert.objects.filter(owner=request.user)
+        return render (request, 'advert/dashbord.html',{'user_ads':user_ads})
+
+class AdsDetailsView(View):
+    def get(self,request,advert_slug=None):
+        advert = Advert.objects.get(slug=advert_slug)
+        return render(request,'advert/advert_details.html',{'advert':advert})

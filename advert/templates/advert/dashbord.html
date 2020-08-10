@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for ads in user_ads %}
+{% include "advert/advert_card_dashbord.html" %}
+{% endfor %}
+{% endblock content %}
