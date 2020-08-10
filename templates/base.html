@@ -1,0 +1,12 @@
+<header>
+<a href="{% url 'home' %}">Home</a> |
+</header>
+{% if user.is_authenticated %}
+<p>Hej {{ user.username }}!</p>
+    <p><a href="{% url 'logout' %}">Wyloguj sie</a></p>
+{% else %}
+<p>You are not logged in.</p>
+<a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% block content %}
+{% endblock content %}
