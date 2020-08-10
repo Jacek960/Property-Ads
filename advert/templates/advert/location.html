@@ -1,0 +1,10 @@
+<h3 class="text-center">Loklizacje:</h3>
+<div class="all-categories text-justify ">
+    <ul class="all-cat-list d-inline-block ">
+        {% for location in location_count %}
+            <span style="margin-right:20px" class="ml-25"><a
+                    href="{% url 'all_ads_location' location.slug %}">{{ location }} <span
+                    class="num-of-ads">({{ location.total_locations }})</span></a></span>
+        {% endfor %}
+    </ul>
+</div>

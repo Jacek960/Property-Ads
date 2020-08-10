@@ -1,0 +1,12 @@
+<h3 class="text-center">Kategorie:</h3>
+<div class="dashboard-alerts">
+    <div class="all-categories text-center">
+        <ul style="font-size: 25px" class="all-cat-list d-inline-block">
+            {% for category in category_count %}
+                <span style="margin-right:50px" class="ml-25"><a
+                        href="{% url 'all_ads_category' category.slug %}">{{ category }} <span
+                        class="num-of-ads">({{ category.total_products }})</span></a></span>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

@@ -1,4 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Strona glowna</h1>
+    {% include "advert/category.html" %}
+    {% include "advert/location.html" %}
+
+    <h5 class="text-center">Ostatnio dodane ogłoszenia:</h5>
+    <div class="row">
+        {% for ads in last3_ads %}
+            {% include "advert/advert_card_small.html" %}
+        {% endfor %}
+    </div>
+
 {% endblock content %}
