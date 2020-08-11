@@ -47,7 +47,11 @@ class AdByCategoryView(View):
 class AllAdsView(View):
     def get(self,request):
         all_advertisement= Advert.objects.all().order_by('-created')
-        return render(request, 'advert/adverts_page.html', {'all_advertisement':all_advertisement,})
+        categorys = Category.objects.all().order_by('name')
+        locations = Location.objects.all().order_by('name')
+        return render(request, 'advert/adverts_page.html', {'all_advertisement':all_advertisement,
+                                                            'categorys':categorys,
+                                                            'locations':locations})
 
 
 class AdsByLocationView(View):
@@ -122,4 +126,41 @@ class AdDeleteView(LoginRequiredMixin,View):
         advertt = Advert.objects.get(pk=id)
         advertt.delete()
         return redirect('dashbord')
+
+
+class SearchView(View):
+    def get(self,request):
+        qs= Advert.objects.all()
+        categorys=Category.objects.all().order_by('name')
+        locations = Location.objects.all().order_by('name')
+        category_query= request.GET.get('category')
+        location_query= request.GET.get('location')
+        price_max_query = request.GET.get('price_max')
+        price_min_query = request.GET.get('price_min')
+        room_query = request.GET.get('room')
+
+        if category_query is not None:
+            qs = qs.filter(category=category_query)
+
+            if location_query is not None:
+                qs = qs.filter(location=location_query)
+
+        if price_min_query !='' and price_min_query is not None:
+            qs = qs.filter(price__gte=price_min_query)
+
+        if price_max_query !='' and price_max_query is not None:
+            qs = qs.filter(price__lte=price_max_query)
+
+        if room_query !='' and room_query is not None:
+            qs = qs.filter(no_of_rooms=room_query)
+
+
+        context = {
+            'categorys':categorys,
+             'locations':locations,
+            "queryset":qs
+        }
+        return render(request,'advert/search.html',context)
+
+
 

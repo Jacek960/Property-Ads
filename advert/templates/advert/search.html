@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <br>
+    {% include "advert/search_bar.html" %}
+    <br>
+    {% for ads in queryset %}
+        {% include "advert/advert_card.html" %}
+    {% endfor %}
+
+    </div>
+
+
+{% endblock %}
