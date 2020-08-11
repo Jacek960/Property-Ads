@@ -1,7 +1,12 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.db.models import Count
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 # Create your views here.
+from django.views.generic import CreateView, UpdateView
+
+from advert.forms import AdvertForm
 from advert.models import Category, Location, Advert
 
 
@@ -41,7 +46,7 @@ class AdByCategoryView(View):
 
 class AllAdsView(View):
     def get(self,request):
-        all_advertisement= Advert.objects.all()
+        all_advertisement= Advert.objects.all().order_by('-created')
         return render(request, 'advert/adverts_page.html', {'all_advertisement':all_advertisement,})
 
 
@@ -70,3 +75,37 @@ class AdsDetailsView(View):
     def get(self,request,advert_slug=None):
         advert = Advert.objects.get(slug=advert_slug)
         return render(request,'advert/advert_details.html',{'advert':advert})
+
+
+class AdvertUpdate(LoginRequiredMixin, UpdateView):
+    model = Advert
+    form_class = AdvertForm
+    template_name = 'advert/add_ad_form.html'
+    success_url = '/dashbord/'
+
+    def user_passes_test(self, request):
+        if request.user.is_authenticated:
+            self.object = self.get_object()
+            return self.object.owner == request.user
+        return False
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.user_passes_test(request):
+            return redirect('home')
+        return super(AdvertUpdate, self).dispatch(
+            request, *args, **kwargs)
+
+
+class AdCreateView(LoginRequiredMixin,View):
+    def get(self,request):
+        form = AdvertForm()
+        return render(request, 'advert/add_ad_form.html',
+                      {'form': form})
+    def post(self,request):
+        advertForm = AdvertForm(request.POST, request.FILES)
+        if advertForm.is_valid():
+            advert = advertForm.save(commit=False)
+            advert.owner = request.user
+            advert.save()
+            advertForm.save_m2m()
+        return redirect('dashbord')

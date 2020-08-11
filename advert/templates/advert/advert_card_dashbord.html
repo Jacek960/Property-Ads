@@ -15,7 +15,7 @@
         <br>
         <a href="{% url 'ads_details'  ads.slug %}"><button type="button" class="btn btn-success">Sprawdż</button></a>
         {#                {% url 'ad_details' ads.id ads.slug %}#}
-        <a href=""><button type="button" class="btn btn-warning">Zmień</button></a>
+        <a href="{% url 'edit_ad' ads.id %}"><button type="button" class="btn btn-warning">Zmień</button></a>
         <a href=><button type="button" class="btn btn-danger">Usuń</button></a>
     </div>
 </div>
