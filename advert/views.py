@@ -1,11 +1,8 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.views import View
-# Create your views here.
 from django.views.generic import CreateView, UpdateView
-
 from advert.forms import AdvertForm
 from advert.models import Category, Location, Advert
 
