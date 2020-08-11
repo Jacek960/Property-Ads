@@ -5,43 +5,43 @@
         <table class="table table-striped">
             <tbody>
             <tr>
+                <td>Zdjecie profilowe</td>
+                <td><img src="{{ user.profile.profile_image.url }}"/></td>
+            </tr>
+            <tr>
                 <td>Nazwa użytkownika</td>
                 <td>{{ user.username }}</td>
             </tr>
             <tr>
                 <td>email</td>
-                <td>{{ profile.email }}</td>
+                <td>{{ user.profile.email }}</td>
             </tr>
             <tr>
                 <td>Imię</td>
-                <td>{{ profile.first_name }}</td>
+                <td>{{ user.profile.first_name }}</td>
             </tr>
             <tr>
                 <td>Nazwisko</td>
-                <td>{{ profile.last_name }}</td>
+                <td>{{ user.profile.last_name }}</td>
             </tr>
             </tr>
             <tr>
                 <td>Ostatnie logowanie</td>
                 <td>{{ user.last_login }}</td>
             </tr>
-                        <tr>
+            <tr>
                 <td>Telefon</td>
-                <td>{{ profile.phone_number }}</td>
+                <td>{{ user.profile.phone_number }}</td>
             </tr>
             <tr>
-                            <td>Nazwa firmy</td>
-                <td>{{ profile.company_name }}</td>
-            </tr>
-                        <tr>
-                            <td>Nazwa firmy</td>
-                <td>{{ profile.profile_image.url }}</td>
+                <td>Nazwa firmy</td>
+                <td>{{ user.profile.company_name }}</td>
             </tr>
             </tbody>
         </table>
 
         <div style="height: 100px;padding-top: 25px">
-            <a href=" {% url 'dashbord' %}"class="btn btn-info float-left mr-2"
+            <a href=" {% url 'dashbord' %}" class="btn btn-info float-left mr-2"
                role="button" aria-disabled="true">Moje Ogłoszenia</a>
             <a href="{% url 'user-update-profile' %}" class="btn btn-danger float-left mr-2"
                role="button" aria-disabled="true">Zmień swoje dane</a>

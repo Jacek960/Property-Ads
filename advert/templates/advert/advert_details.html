@@ -89,21 +89,31 @@
             </div>
 
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="text-align: center;">
             <h2 style="float: right">{{ advert.price }} zł</h2>
             </br>
             </br>
             </br>
-            <div style="text-align: center">Ogłoszenie nr <strong>Ad4U {{ advert.id }}</strong></div>
-            <div style="border: #5a6268 solid 1px; border-radius: 3px">
-                <h5>Informacje o ogłoszeniodawcy:</h5>
-                <h4>{{ advert.owner.first_name }} {{ advert.owner.last_name }}</h4>
+            <div style="position: -webkit-sticky;position: sticky;top:80px">
+                <div style="text-align: center">Ogłoszenie nr <strong style="color: red">Ad4U{{ advert.id }}</strong>
+                </div>
+                <div style="border: #5a6268 solid 1px; border-radius: 3px;background-color:#f5f5f0; ">
+                    <h3><strong>{{ advert.owner.profile.company_name }}</strong></h3>
 
-                <p>Telefon</p>
-                <p>Email: {{ advert.owner.email }}  </p>
-                <p></p>
-                <p></p>
+                    <h5>Informacje o ogłoszeniodawcy:</h5>
+                    <img src="{{ advert.owner.profile.profile_image.url }}"/>
+                    <br>
+                    <br>
 
+                    <h4>{{ advert.owner.profile.first_name }} {{ advert.owner.profile.last_name }}</h4>
+                    <p>{{ advert.owner.profile.company_name }}</p>
+                    <br>
+
+                    <p><strong>Email:</strong> {{ advert.owner.profile.email }}  </p>
+                    <p><strong>Telefon:</strong> {{ advert.owner.profile.phone_number }}</p>
+                    <p></p>
+
+                </div>
             </div>
         </div>
     </div>

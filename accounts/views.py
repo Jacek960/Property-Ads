@@ -19,8 +19,8 @@ class SignUpView(generic.CreateView):
 class UserProfile(LoginRequiredMixin, View):
     def get(self, request):
         user = User.objects.get(username=request.user)
-        profile= Profile.objects.get(user=request.user)
-        return render(request, 'accounts/user_profile.html', {'user': user,'profile': profile})
+        # profile= Profile.objects.get(user=request.user)
+        return render(request, 'accounts/user_profile.html', {'user': user,})
 
 class UserUpdate(LoginRequiredMixin, UpdateView):
     model = Profile
@@ -29,4 +29,4 @@ class UserUpdate(LoginRequiredMixin, UpdateView):
     success_url = '/accounts/profil/'
 
     def get_object(self, queryset=None):
-        return self.request.user
+        return self.request.user.profile

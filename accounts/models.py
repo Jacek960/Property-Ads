@@ -15,7 +15,7 @@ class Profile(models.Model):
     email= models.EmailField(max_length=254,blank=True)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 
 def create_profile(sender, user, request, **kwargs):
