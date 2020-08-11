@@ -7,7 +7,8 @@ from django.views import generic
 from django.views import View
 from django.views.generic import UpdateView
 
-from accounts.forms import UserUpdateForm
+from accounts.forms import ProfileUpdateForm
+from accounts.models import Profile
 
 
 class SignUpView(generic.CreateView):
@@ -18,12 +19,13 @@ class SignUpView(generic.CreateView):
 class UserProfile(LoginRequiredMixin, View):
     def get(self, request):
         user = User.objects.get(username=request.user)
-        return render(request, 'accounts/user_profile.html', {'user': user})
+        profile= Profile.objects.get(user=request.user)
+        return render(request, 'accounts/user_profile.html', {'user': user,'profile': profile})
 
 class UserUpdate(LoginRequiredMixin, UpdateView):
-    model = User
-    form_class = UserUpdateForm
-    template_name = 'accounts/user_update_form.html'
+    model = Profile
+    form_class = ProfileUpdateForm
+    template_name = 'accounts/profile_update_form.html'
     success_url = '/accounts/profil/'
 
     def get_object(self, queryset=None):
