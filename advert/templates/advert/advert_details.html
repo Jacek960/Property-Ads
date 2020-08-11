@@ -95,9 +95,12 @@
             </br>
             </br>
             <div style="text-align: center">Ogłoszenie nr <strong>Ad4U {{ advert.id }}</strong></div>
-            <div style="border: #5a6268 solid 1px; border-radius: 10px">
+            <div style="border: #5a6268 solid 1px; border-radius: 3px">
+                <h5>Informacje o ogłoszeniodawcy:</h5>
+                <h4>{{ advert.owner.first_name }} {{ advert.owner.last_name }}</h4>
+
                 <p>Telefon</p>
-                <p>email </p>
+                <p>Email: {{ advert.owner.email }}  </p>
                 <p></p>
                 <p></p>
 
