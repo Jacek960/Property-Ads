@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import HomePageView, AdByCategoryView, AllAdsView, AdsByLocationView, DashbordView, AdsDetailsView, AdCreateView, AdvertUpdate
+from .views import HomePageView, AdByCategoryView, AllAdsView, AdsByLocationView, DashbordView, AdsDetailsView, AdCreateView, AdvertUpdate,AdDeleteView
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
@@ -9,5 +9,6 @@ urlpatterns = [
     path('dashbord/', DashbordView.as_view(), name='dashbord'),
     path('ogloszenia/<slug:advert_slug>/',AdsDetailsView.as_view(), name='ads_details'),
     path('dodaj-ogloszenie/',AdCreateView.as_view(), name='ads_create'),
-    path('zmien-odgloszenie/<int:pk>/',AdvertUpdate.as_view(), name='edit_ad'),
+    path('zmien-ogloszenie/<int:pk>/',AdvertUpdate.as_view(), name='edit_ad'),
+    path('usun-ogloszenie/<int:id>/',AdDeleteView.as_view(), name='delete_ad'),
 ]

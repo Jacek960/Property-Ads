@@ -109,3 +109,17 @@ class AdCreateView(LoginRequiredMixin,View):
             advert.save()
             advertForm.save_m2m()
         return redirect('dashbord')
+
+class AdDeleteView(LoginRequiredMixin,View):
+    def get(self,request,id):
+        advertt = Advert.objects.get(pk=id)
+        if advertt.owner == request.user:
+            advert_del = Advert.objects.get(pk=id)
+            return render(request, 'advert/ad_delete.html', {'advert_del': advert_del})
+        else:
+            return redirect('home')
+    def post(self,request,id):
+        advertt = Advert.objects.get(pk=id)
+        advertt.delete()
+        return redirect('dashbord')
+
