@@ -112,6 +112,11 @@
                     <p><strong>Email:</strong> {{ advert.owner.profile.email }}  </p>
                     <p><strong>Telefon:</strong> {{ advert.owner.profile.phone_number }}</p>
                     <p></p>
+<a href="{% url 'user_ads'  advert.owner.id %}">
+            <button type="button" class="btn btn-info">Nasze ogłoszenia </button>
+        </a>
+                    <br>
+                    <br>
 
                 </div>
             </div>

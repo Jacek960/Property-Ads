@@ -1,13 +1,15 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import CreateView, UpdateView
 from advert.forms import AdvertForm
-from advert.models import Category, Location, Advert
+from advert.models import Category, Location, Advert, Banner
+from accounts.models import Profile
 
-pagination_quantity = 10 # Show  adverts per page.
+pagination_quantity = 1 # Show  adverts per page.
 
 class HomePageView(View):
     def get(self,request):
@@ -17,20 +19,22 @@ class HomePageView(View):
         location_count = Location.objects.annotate(total_locations=Count('advert')).order_by('name')
         last3_ads = Advert.objects.order_by('-created')[0:3]
         premium3_ads = Advert.objects.filter(premium='True').order_by('-created')[0:3]
+        banner = Banner.objects.filter(is_active=True)
         return render(request, 'advert/home_page.html',{
         'categorys':categorys,
         'locations': locations,
         'category_count': category_count,
         'location_count': location_count,
         'last3_ads':last3_ads,
-            'premium3_ads':premium3_ads,
+        'premium3_ads':premium3_ads,
+        'banner':banner,
         })
 
 class AdByCategoryView(View):
     def get(self,request,category_slug=None):
         category_count = Category.objects.annotate(total_products=Count('advert')).order_by('name')
         location_count = Location.objects.annotate(total_locations=Count('advert')).order_by('name')
-        all_advertisement= Advert.objects.all().order_by('-premium',)
+        all_advertisement= Advert.objects.all().order_by('-premium','-created')
         categorys = Category.objects.all().order_by('name')
         locations = Location.objects.all().order_by('name')
         if category_slug:
@@ -65,9 +69,9 @@ class AdsByLocationView(View):
     def get(self,request,location_slug=None):
         location_count = Location.objects.annotate(total_locations=Count('advert')).order_by('name')
         category_count = Category.objects.annotate(total_products=Count('advert')).order_by('name')
-        all_advertisement = Advert.objects.all().order_by('-premium',)
+        all_advertisement = Advert.objects.all().order_by('-premium','-created')
         categorys = Category.objects.all().order_by('name')
-        locations = Location.objects.all().order_by('-premium','name')
+        locations = Location.objects.all().order_by('name')
         if location_slug:
             location = Location.objects.get(slug=location_slug)
             all_advertisement=all_advertisement.filter(location=location)
@@ -89,8 +93,8 @@ class DashbordView(View):
         return render (request, 'advert/dashbord.html',{'all_advertisement':all_advertisement})
 
 class AdsDetailsView(View):
-    def get(self,request,advert_slug=None):
-        advert = Advert.objects.get(slug=advert_slug)
+    def get(self,request,id, advert_slug=None):
+        advert = Advert.objects.get(slug=advert_slug,id=id)
         return render(request,'advert/advert_details.html',{'advert':advert})
 
 
@@ -174,6 +178,15 @@ class SearchView(View):
             "queryset":qs
         }
         return render(request,'advert/search.html',context)
+
+class UserAdsView(View):
+    def get(self,request,owner_id):
+        all_advertisement = Advert.objects.filter(owner_id=owner_id)
+        paginator = Paginator(all_advertisement, pagination_quantity)
+        page = request.GET.get('page')
+        all_advertisement = paginator.get_page(page)
+        return render(request, 'advert/user_ads.html', {'all_advertisement': all_advertisement})
+
 
 
 

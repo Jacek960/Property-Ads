@@ -1,7 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
     {% include "advert/search_bar.html" %}
-    {% include "advert/category.html" %}
+    <div class="row">
+  <div class="col-sm-4" style="display: block">
+{% include "advert/category.html" %}
+-</div>
+  <div class="col-sm-8">
+  <br>
+  <br>
+  <div id="baner"style="margin-left: -100px">
+      {% for baner in banner %}
+      <a href="{{ baner.url}} ">
+      <img src="{{ baner.image.url }}" alt="{{ banner.name}}" width="820" height="325"></a>
+      <p style="margin-top: -80px;margin-bottom:80px; text-align: center;color: white;font-size: 25px;font-family:'Arial'; ">{{ baner.description }}</p>
+      {% endfor %}
+      </div>
+    </div>
+</div>
+
     {% include "advert/location.html" %}
 
     <h5 class="text-center">Ostatnio dodane ogłoszenia:</h5>

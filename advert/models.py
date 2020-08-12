@@ -74,3 +74,14 @@ class Advert(models.Model):
     def __str__(self):
         return f'{self.location}-{self.category}-{self.street}'
 
+
+class Banner(models.Model):
+    name = models.CharField(max_length=64)
+    description = models.CharField(max_length=128)
+    image = models.ImageField(upload_to='baner/')
+    url = models.CharField(max_length=350)
+    is_active = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+

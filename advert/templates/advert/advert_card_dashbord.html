@@ -15,7 +15,7 @@
     <div class="col">
         <br>
         <br>
-        <a href="{% url 'ads_details'  ads.slug %}"><button type="button" class="btn btn-success">Sprawdż</button></a>
+        <a href="{% url 'ads_details'  ads.id  ads.slug %}"><button type="button" class="btn btn-success">Sprawdż</button></a>
         <a href="{% url 'edit_ad' ads.id %}"><button type="button" class="btn btn-warning">Zmień</button></a>
         <a href="{% url 'delete_ad' ads.id %}"><button type="button" class="btn btn-danger">Usuń</button></a>
     </div>
@@ -36,7 +36,7 @@
     <div class="col">
         <br>
         <br>
-        <a href="{% url 'ads_details'  ads.slug %}"><button type="button" class="btn btn-success">Sprawdż</button></a>
+        <a href="{% url 'ads_details'  ads.id  ads.slug %}"><button type="button" class="btn btn-success">Sprawdż</button></a>
         <a href="{% url 'edit_ad' ads.id %}"><button type="button" class="btn btn-warning">Zmień</button></a>
         <a href="{% url 'delete_ad' ads.id %}"><button type="button" class="btn btn-danger">Usuń</button></a>
     </div>

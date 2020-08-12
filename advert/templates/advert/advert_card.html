@@ -15,7 +15,7 @@
     <div class="col">
         <br>
         <br>
-        <a href="{% url 'ads_details'  ads.slug %}">
+        <a href="{% url 'ads_details'  ads.id  ads.slug %}">
             <button type="button" class="btn btn-success">Sprawdż</button>
         </a>
     </div>
@@ -36,7 +36,7 @@
     <div class="col">
         <br>
         <br>
-        <a href="{% url 'ads_details'  ads.slug %}">
+        <a href="{% url 'ads_details' ads.id  ads.slug %}">
             <button type="button" class="btn btn-success">Sprawdż</button>
         </a>
     </div>
