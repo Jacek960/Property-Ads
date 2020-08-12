@@ -10,5 +10,12 @@
             {% include "advert/advert_card_small.html" %}
         {% endfor %}
     </div>
+    <h5 class="text-center">Ostatnio wyróżnione ogłoszenia</h5>
+    <div class="row">
+        {% for ads in premium3_ads %}
+            {% include "advert/advert_card_small.html" %}
+        {% endfor %}
+    </div>
 
 {% endblock content %}
+

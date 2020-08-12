@@ -59,6 +59,7 @@ class Advert(models.Model):
     image1 = models.ImageField(upload_to='ad_image/', blank=True, null=True)
     image2 = models.ImageField(upload_to='ad_image/', blank=True, null=True)
     image3 = models.ImageField(upload_to='ad_image/', blank=True, null=True)
+    premium = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if not self.slug and self.street:

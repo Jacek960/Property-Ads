@@ -7,7 +7,7 @@ from django.views.generic import CreateView, UpdateView
 from advert.forms import AdvertForm
 from advert.models import Category, Location, Advert
 
-pagination_quantity = 1 # Show  adverts per page.
+pagination_quantity = 10 # Show  adverts per page.
 
 class HomePageView(View):
     def get(self,request):
@@ -16,19 +16,21 @@ class HomePageView(View):
         category_count = Category.objects.annotate(total_products=Count('advert')).order_by('name')
         location_count = Location.objects.annotate(total_locations=Count('advert')).order_by('name')
         last3_ads = Advert.objects.order_by('-created')[0:3]
+        premium3_ads = Advert.objects.filter(premium='True').order_by('-created')[0:3]
         return render(request, 'advert/home_page.html',{
         'categorys':categorys,
         'locations': locations,
         'category_count': category_count,
         'location_count': location_count,
         'last3_ads':last3_ads,
+            'premium3_ads':premium3_ads,
         })
 
 class AdByCategoryView(View):
     def get(self,request,category_slug=None):
         category_count = Category.objects.annotate(total_products=Count('advert')).order_by('name')
         location_count = Location.objects.annotate(total_locations=Count('advert')).order_by('name')
-        all_advertisement= Advert.objects.all()
+        all_advertisement= Advert.objects.all().order_by('-premium',)
         categorys = Category.objects.all().order_by('name')
         locations = Location.objects.all().order_by('name')
         if category_slug:
@@ -48,7 +50,7 @@ class AdByCategoryView(View):
 
 class AllAdsView(View):
     def get(self,request):
-        all_advertisement= Advert.objects.all().order_by('-created')
+        all_advertisement= Advert.objects.all().order_by('-premium','-created')
         categorys = Category.objects.all().order_by('name')
         locations = Location.objects.all().order_by('name')
         paginator = Paginator(all_advertisement, pagination_quantity)
@@ -63,9 +65,9 @@ class AdsByLocationView(View):
     def get(self,request,location_slug=None):
         location_count = Location.objects.annotate(total_locations=Count('advert')).order_by('name')
         category_count = Category.objects.annotate(total_products=Count('advert')).order_by('name')
-        all_advertisement = Advert.objects.all()
+        all_advertisement = Advert.objects.all().order_by('-premium',)
         categorys = Category.objects.all().order_by('name')
-        locations = Location.objects.all().order_by('name')
+        locations = Location.objects.all().order_by('-premium','name')
         if location_slug:
             location = Location.objects.get(slug=location_slug)
             all_advertisement=all_advertisement.filter(location=location)
