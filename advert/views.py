@@ -143,7 +143,7 @@ class AdDeleteView(LoginRequiredMixin,View):
 
 class SearchView(View):
     def get(self,request):
-        qs= Advert.objects.all()
+        qs= Advert.objects.all().order_by('-premium','-created')
         categorys=Category.objects.all().order_by('name')
         locations = Location.objects.all().order_by('name')
         category_query= request.GET.get('category')
