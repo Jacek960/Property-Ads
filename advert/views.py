@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.views import View
@@ -6,6 +7,7 @@ from django.views.generic import CreateView, UpdateView
 from advert.forms import AdvertForm
 from advert.models import Category, Location, Advert
 
+pagination_quantity = 1 # Show  adverts per page.
 
 class HomePageView(View):
     def get(self,request):
@@ -32,6 +34,9 @@ class AdByCategoryView(View):
         if category_slug:
             category = Category.objects.get(slug=category_slug)
             all_advertisement=all_advertisement.filter(category=category)
+            paginator = Paginator(all_advertisement, pagination_quantity)
+            page = request.GET.get('page')
+            all_advertisement = paginator.get_page(page)
 
         return render(request, 'advert/adverts_page.html', {'all_advertisement':all_advertisement,
                 'category_count': category_count,
@@ -46,6 +51,9 @@ class AllAdsView(View):
         all_advertisement= Advert.objects.all().order_by('-created')
         categorys = Category.objects.all().order_by('name')
         locations = Location.objects.all().order_by('name')
+        paginator = Paginator(all_advertisement, pagination_quantity)
+        page = request.GET.get('page')
+        all_advertisement = paginator.get_page(page)
         return render(request, 'advert/adverts_page.html', {'all_advertisement':all_advertisement,
                                                             'categorys':categorys,
                                                             'locations':locations})
@@ -61,6 +69,9 @@ class AdsByLocationView(View):
         if location_slug:
             location = Location.objects.get(slug=location_slug)
             all_advertisement=all_advertisement.filter(location=location)
+            paginator = Paginator(all_advertisement, pagination_quantity)
+            page = request.GET.get('page')
+            all_advertisement = paginator.get_page(page)
         return render(request, 'advert/adverts_page.html',{'all_advertisement':all_advertisement,
                                                                        'category_count': category_count,
                                                                        'location_count': location_count,
@@ -70,7 +81,10 @@ class AdsByLocationView(View):
 class DashbordView(View):
     def get(self,request):
         user_ads = Advert.objects.filter(owner=request.user)
-        return render (request, 'advert/dashbord.html',{'user_ads':user_ads})
+        paginator = Paginator(user_ads, pagination_quantity)
+        page = request.GET.get('page')
+        all_advertisement = paginator.get_page(page)
+        return render (request, 'advert/dashbord.html',{'all_advertisement':all_advertisement})
 
 class AdsDetailsView(View):
     def get(self,request,advert_slug=None):

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-{% for ads in user_ads %}
+{% for ads in all_advertisement %}
 {% include "advert/advert_card_dashbord.html" %}
 {% endfor %}
+    {% include "advert/pagination-link.html" %}
 {% endblock content %}
