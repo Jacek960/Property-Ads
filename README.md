@@ -22,7 +22,7 @@ Dashbord
 All Adverts and search Page
 ![Search page](./img/allads.png)
 Advertisement Page
-![Advertisement page](img/ad_des.png)
+![Advertisement page](./img/advert_des.png)
 
 ## Technologies
 * Django 3.1
