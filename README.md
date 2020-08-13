@@ -17,8 +17,8 @@ Websites for Advertising Property Rental Listing
 ## Screenshots
 Home Page
 ![Home page](./img/home_page.png)
-Advert Page
-![Advet page](img/adpage.png)
+Advertisement Page
+![Advertisement page](img/ad.png)
 Dashbord
 ![Dashbord page](./img/dashbord.png)
 All Adverts and search Page
