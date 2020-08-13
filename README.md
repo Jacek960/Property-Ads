@@ -20,9 +20,9 @@ Home Page
 Advert Page
 ![Advet page](./img/advert_page.png)
 Dashbord
-![Advet page](./img/dashbord.png)
-Adverts Page
-![Advet page](./img/adverts.png)
+![Dashbord page](./img/dashbord.png)
+All Adverts and search Page
+![Search page](./img/adverts.png)
 
 ## Technologies
 * Django 3.1
