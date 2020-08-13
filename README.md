@@ -18,11 +18,11 @@ Websites for Advertising Property Rental Listing
 Home Page
 ![Home page](./img/home_page.png)
 Advert Page
-![Advet page](./img/advert_page.png)
+![Advet page](img/adpage.png)
 Dashbord
 ![Dashbord page](./img/dashbord.png)
 All Adverts and search Page
-![Search page](./img/adverts.png)
+![Search page](img/allads.png)
 
 ## Technologies
 * Django 3.1
