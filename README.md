@@ -21,6 +21,8 @@ Dashbord
 ![Dashbord page](./img/dashbord.png)
 All Adverts and search Page
 ![Search page](./img/allads.png)
+Ad Page
+![Ad page](./img/advert_page.jpg)
 Advertisement Page
 ![Advertisement page](./img/advert_des.png)
 
