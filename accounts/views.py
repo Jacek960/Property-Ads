@@ -16,11 +16,12 @@ class SignUpView(generic.CreateView):
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
 
+
 class UserProfile(LoginRequiredMixin, View):
     def get(self, request):
         user = User.objects.get(username=request.user)
-        # profile= Profile.objects.get(user=request.user)
-        return render(request, 'accounts/user_profile.html', {'user': user,})
+        return render(request, 'accounts/user_profile.html', {'user': user, })
+
 
 class UserUpdate(LoginRequiredMixin, UpdateView):
     model = Profile

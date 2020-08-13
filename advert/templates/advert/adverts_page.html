@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-     {% include "advert/search_bar.html" %}
+    {% include "advert/search_bar.html" %}
     <br>
-{% for ads in all_advertisement %}
-{% include "advert/advert_card.html" %}
-{% endfor %}
+    {% for ads in all_advertisement %}
+        {% include "advert/advert_card.html" %}
+    {% endfor %}
 
     {% include "advert/pagination-link.html" %}
 {% endblock content %}

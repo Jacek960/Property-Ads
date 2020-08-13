@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 
-{% block content%}
+{% block content %}
     <br>
 
-<h3>Czy napewno chcesz usunąć ogłoszenie numer {{ advert_del.id }} ???</h3>
+    <h3>Czy napewno chcesz usunąć ogłoszenie numer {{ advert_del.id }} ???</h3>
     <br>
-<form method="POST"  enctype="multipart/form-data">
-{% csrf_token %}
-   <p>Na wynajem  {{ advert_del.category }} {{ advert_del.location }} {{ advert_del.street }}</p>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>Na wynajem {{ advert_del.category }} {{ advert_del.location }} {{ advert_del.street }}</p>
         <br>
 
-<input class="btn btn-danger" type="submit" value="Tak - usuń ogłoszenie" />
-</form>
+        <input class="btn btn-danger" type="submit" value="Tak - usuń ogłoszenie"/>
+    </form>
     <br>
-    <a href=" {% url 'dashbord'  %}  "><button type="button" class="btn btn-success">Nie - wróc do moich ogłoszeń</button></a>
+    <a href=" {% url 'dashbord' %}  ">
+        <button type="button" class="btn btn-success">Nie - wróc do moich ogłoszeń</button>
+    </a>
 {% endblock %}
 

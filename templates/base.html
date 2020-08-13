@@ -56,14 +56,14 @@
                         <li class="nav-item">
                             <a class="nav-link " href="{% url 'dashbord' %}">Moje Ogloszenia</a></li>
                         <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dodaj
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url 'ads_create' %}">Dodaj ogloszenie</a>
-                        </div>
-                    </li>
+                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dodaj
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{% url 'ads_create' %}">Dodaj ogloszenie</a>
+                            </div>
+                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link " href="{% url 'logout' %}">Wyloguj się</a></li>
@@ -75,11 +75,11 @@
     </nav>
 </header>
 <main role="main">
-<div class="container" style="margin-top: 80px">
-    {% block content %}
+    <div class="container" style="margin-top: 80px">
+        {% block content %}
 
-    {% endblock %}
-</div>
+        {% endblock %}
+    </div>
 </main>
 <footer class="text-muted bg-dark ">
     <div class="container ">
@@ -88,6 +88,18 @@
         </p>
         {% now "Y" as current_year %}
         <p style="text-align: center"><i class="fas fa-ad"></i> Advert4U {{ current_year }}</p>
+        <div style="float: right">
+            <a href="https://www.facebook.com/" target="_blank">
+                <i class="fab fa-facebook-square mr-4 icon-social"></i>
+            </a>
+            <a href="https://twitter.com/" target="_blank">
+                <i class="fab fa-twitter-square mr-4 icon-social"></i>
+
+            </a>
+            <a href="https://www.instagram.com/" target="_blank">
+                <i class="fab fa-instagram icon-social"></i>
+            </a>
+        </div>
     </div>
 </footer>
 
