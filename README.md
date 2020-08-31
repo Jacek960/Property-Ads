@@ -1,5 +1,5 @@
 # Property Advertising Website
-> Websites for Advertising Your Property Rental Listing
+> Website for Advertising Your Property Rental Listing
 
 ## Table of contents
 * [General info](#general-info)
