@@ -12,7 +12,7 @@
 * [Contact](#contact)
 
 ## General info
-Websites for Advertising Property Rental Listing
+Website for Advertising Property Rental Listing
 
 ## Screenshots
 Home Page
